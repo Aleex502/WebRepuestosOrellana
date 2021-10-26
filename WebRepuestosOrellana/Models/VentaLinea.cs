@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WebRepuestosOrellana.Models
 {
-    public class VentaDetalle
+    public class VentaLinea
     {
         [Key]
         public int ID { get; set; }

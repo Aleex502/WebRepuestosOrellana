@@ -29,6 +29,13 @@ namespace WebRepuestosOrellana.Models
         public DbSet<Proveedor> Proveedors { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<TipoProducto> TipoProductos { get; set; }
+        public DbSet<Bodega> Bodegas { get; set; }
+        public DbSet<Compra> Compras { get; set; }
+        public DbSet<CompraLinea> CompraLineas { get; set; }
+        public DbSet<Venta> Ventas { get; set; }
+        public DbSet<VentaLinea> VentaLineas { get; set; }
+        public DbSet<Transaccion> Transaccions { get; set; }
+        
 
         public static ApplicationDbContext Create()
         {
