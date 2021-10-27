@@ -9,10 +9,9 @@ namespace WebRepuestosOrellana.Models
         [Key]
         public int ID { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
-        public Empleado IdUsuario { get; set; }
-        public int ProveedorID { get; set; }
+        public int ClienteID { get; set; }
         public int EmpleadoID { get; set; }
-        public Proveedor Proveedor { get; set; }
+        public Cliente Cliente { get; set; }
         public Empleado Empleado { get; set; }
         public ICollection<VentaLinea> VentaLineas { get; set; }
     }

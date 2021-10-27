@@ -42,6 +42,6 @@ namespace WebRepuestosOrellana.Models
             return new ApplicationDbContext();
         }
 
-        
+        public System.Data.Entity.DbSet<WebRepuestosOrellana.Models.Cliente> Clientes { get; set; }
     }
 }

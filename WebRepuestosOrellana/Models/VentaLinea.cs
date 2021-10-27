@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WebRepuestosOrellana.Models
 {
@@ -11,6 +7,7 @@ namespace WebRepuestosOrellana.Models
         [Key]
         public int ID { get; set; }
         public int NoLinea { get; set; }
+        public int ProductoID { get; set; }
         public Producto Producto { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebRepuestosOrellana.Models
 {
@@ -7,6 +8,7 @@ namespace WebRepuestosOrellana.Models
         [Key]
         public int ID { get; set; }
         public string Descripcion { get; set; }
+        public Decimal Precio { get; set; }
         public int TipoProductoID { get; set; }
         public TipoProducto TipoProducto { get; set; }
 
