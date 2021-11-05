@@ -23,7 +23,7 @@ namespace WebRepuestosOrellana
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/Flatly.css",
                       "~/Content/site.css"));
         }
     }
