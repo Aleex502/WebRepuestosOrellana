@@ -75,7 +75,7 @@ namespace WebRepuestosOrellana.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion", "Precio", producto.TipoProductoID);
+            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion", producto.TipoProductoID);
             return View(producto);
         }
 
@@ -92,7 +92,7 @@ namespace WebRepuestosOrellana.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion","Precio", producto.TipoProductoID);
+            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion", producto.TipoProductoID);
             return View(producto);
         }
 
