@@ -50,7 +50,7 @@ namespace WebRepuestosOrellana.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Descripcion,TipoProductoID")] Producto producto)
+        public ActionResult Create([Bind(Include = "ID,Descripcion,Precio,TipoProductoID")] Producto producto)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace WebRepuestosOrellana.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion", producto.TipoProductoID);
+            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion", "Precio", producto.TipoProductoID);
             return View(producto);
         }
 
@@ -75,7 +75,7 @@ namespace WebRepuestosOrellana.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion", producto.TipoProductoID);
+            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion", "Precio", producto.TipoProductoID);
             return View(producto);
         }
 
@@ -84,7 +84,7 @@ namespace WebRepuestosOrellana.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Descripcion,TipoProductoID")] Producto producto)
+        public ActionResult Edit([Bind(Include = "ID,Descripcion,Precio,TipoProductoID")] Producto producto)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace WebRepuestosOrellana.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion", producto.TipoProductoID);
+            ViewBag.TipoProductoID = new SelectList(db.TipoProductos, "ID", "Descripcion","Precio", producto.TipoProductoID);
             return View(producto);
         }
 
