@@ -1,9 +1,11 @@
 ﻿$(document).ready(function () {
-
+    let cantidadItems = 0;
     $("#CantidadVentaProducto").change(function () {
         let cantidad = $("#CantidadVentaProducto").val();
         let precio = $("#PrecioUnitarioVenta").val();
-        $("#TotalVenta").val(precio * cantidad);
+        if (precio.length != 0) {
+            $("#TotalVenta").val(precio * cantidad);
+        }
     })
 
     $("#VentaProductoID").change(function () {
@@ -18,5 +20,55 @@
                 $("#TotalVenta").val(data * cantidad);
             }
         })
+    })
+
+    $("#addLineaVenta").click((e) => {
+        e.preventDefault();
+        let productoTexto = $("#VentaProductoID option:selected").text();
+        let productoID = $("#VentaProductoID").val();
+        let cantidad = $("#CantidadVentaProducto").val();
+        let ventasBody = $("#ventasBody");
+        let precio = $("#PrecioUnitarioVenta").val();
+        
+        console.log($("#VentaProductoID"))
+        ventasBody.append("<tr>");
+        ventasBody.append(`<td>${productoTexto}</td>`);
+        ventasBody.append(`<td>${cantidad}</td>`);
+        ventasBody.append(`<td>${precio}</td>`);
+        ventasBody.append(`<td>${cantidad * precio}</td>`);
+        ventasBody.append("</tr>");
+
+        const data = document.getElementById("data");
+
+        let HiddenIndex = document.createElement("input");
+        let HiddenCodigo = document.createElement("input");
+        let HiddenCantidad = document.createElement("input");
+        let HiddenPrecio = document.createElement("input");
+
+        HiddenIndex.name = "lineasVenta[" + cantidadItems + "].NoLinea";
+        HiddenIndex.value = cantidadItems;
+        HiddenIndex.type = "hidden";
+
+        HiddenCantidad.name = "lineasVenta[" + cantidadItems + "].Cantidad";
+        HiddenCantidad.value = cantidad;
+        HiddenCantidad.type = "hidden";
+
+        HiddenCodigo.name = "lineasVenta[" + cantidadItems + "].ProductoID";
+        HiddenCodigo.value = productoID;
+        HiddenCodigo.type = "hidden";
+
+        HiddenPrecio.name = "lineasVenta[" + cantidadItems + "].Precio";
+        HiddenPrecio.value = precio;
+        HiddenPrecio.type = "hidden";
+        data.appendChild(HiddenIndex);
+        data.appendChild(HiddenCodigo);
+        data.appendChild(HiddenCantidad);
+        data.appendChild(HiddenPrecio);
+
+        $("#VentaProductoID").val("");
+        $("#CantidadVentaProducto").val(1);
+        $("#PrecioUnitarioVenta").val("");
+        $("#TotalVenta").val("");
+        cantidadItems++;
     })
 });

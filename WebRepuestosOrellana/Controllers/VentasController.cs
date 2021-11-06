@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebRepuestosOrellana.Models;
+using WebRepuestosOrellana.Models.ViewModels;
 
 namespace WebRepuestosOrellana.Controllers
 {
@@ -17,7 +19,7 @@ namespace WebRepuestosOrellana.Controllers
         // GET: Ventas
         public ActionResult Index()
         {
-            var ventas = db.Ventas.Include(v => v.Cliente).Include(v => v.Empleado);
+            var ventas = db.Ventas.Include(v => v.Cliente).Include(v => v.Usuario);
             return View(ventas.ToList());
         }
 
@@ -28,7 +30,11 @@ namespace WebRepuestosOrellana.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Venta venta = db.Ventas.Find(id);
+            Venta venta = db.Ventas
+                .Include(v => v.Usuario)
+                .Include(v => v.Cliente)
+                .Include(v => v.VentaLineas)
+                .FirstOrDefault(x => x.ID == id);
             if (venta == null)
             {
                 return HttpNotFound();
@@ -53,22 +59,55 @@ namespace WebRepuestosOrellana.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FechaCreacion,ClienteID,EmpleadoID")] Venta venta)
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,FechaCreacion,ClienteID,EmpleadoID, Lineas")] Venta venta)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Ventas.Add(venta);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.ClienteID = new SelectList(db.Clientes, "ID", "Nombre", venta.ClienteID);
+        //    ViewBag.EmpleadoID = new SelectList(db.Empleados, "ID", "Usuario", venta.EmpleadoID);
+        //    return View(venta);
+        //}
+        public ActionResult Create(VentaViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
+                var idUsuario = User.Identity.GetUserId();
+                Venta venta = new Venta();
+                venta.UsuarioID = idUsuario;
+                venta.FechaCreacion = DateTime.Now;
+                venta.ClienteID = model.ClienteID;
                 db.Ventas.Add(venta);
                 db.SaveChanges();
+
+                foreach (var linea in model.lineasVenta)
+                {
+                    VentaLinea lineaVenta = new VentaLinea();
+                    lineaVenta.NoLinea = linea.NoLinea;
+                    lineaVenta.Precio = linea.Precio;
+                    lineaVenta.ProductoID = linea.ProductoID;
+                    lineaVenta.Cantidad = linea.Cantidad;
+                    lineaVenta.VentaID = venta.ID;
+                    db.VentaLineas.Add(lineaVenta);
+                }
+
+                db.SaveChanges();
+                ViewBag.Message = "Registro insertado";
                 return RedirectToAction("Index");
             }
-
-            ViewBag.ClienteID = new SelectList(db.Clientes, "ID", "Nombre", venta.ClienteID);
-            ViewBag.EmpleadoID = new SelectList(db.Empleados, "ID", "Usuario", venta.EmpleadoID);
-            return View(venta);
+            catch (Exception ex)
+            {
+                return View(model);
+            }
         }
 
         // GET: Ventas/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,7 +120,6 @@ namespace WebRepuestosOrellana.Controllers
                 return HttpNotFound();
             }
             ViewBag.ClienteID = new SelectList(db.Clientes, "ID", "Nombre", venta.ClienteID);
-            ViewBag.EmpleadoID = new SelectList(db.Empleados, "ID", "Usuario", venta.EmpleadoID);
             return View(venta);
         }
 
@@ -99,7 +137,6 @@ namespace WebRepuestosOrellana.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ClienteID = new SelectList(db.Clientes, "ID", "Nombre", venta.ClienteID);
-            ViewBag.EmpleadoID = new SelectList(db.Empleados, "ID", "Usuario", venta.EmpleadoID);
             return View(venta);
         }
 

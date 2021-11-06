@@ -42,18 +42,20 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Cantidad</th>
                     <th>Producto</th>
+                    <th>Cantidad</th>
                     <th>Precio Unitario</th>
                     <th>Total</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>@Html.TextBox("CantidadVentaProducto", 1, new { @type = "number", @min = 1})</td>
-                    <td>@Html.DropDownList("VentaProductoID", new SelectList(ViewBag.Productos, "Value", "Text", "" ))</td>
+                    <td>@Html.DropDownList("VentaProductoID", new SelectList(ViewBag.Productos, "Value", "Text", ""))</td>
+                    <td>@Html.TextBox("CantidadVentaProducto", 1, new { @type = "number", @min = 1 })</td>
                     <td>@Html.TextBox("PrecioUnitarioVenta", "", new { @type = "number", @min = 1, @disabled = true })</td>
                     <td>@Html.TextBox("TotalVenta", "", new { @type = "number", @min = 1, @disabled = true })</td>
+                    <td><button id="addLineaVenta" class="btn btn-success">Añadir</button></td>
                 </tr>
         </table>
     </div>
@@ -62,36 +64,19 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Company</th>
-                    <th>Contact</th>
-                    <th>Country</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                </tr>
+            <tbody id="ventasBody">
+                
             </tbody>
         </table>
     </div>
     <div class="form-group">
+        <div id="data"></div>
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Crear" class="btn btn-success" />
         </div>
