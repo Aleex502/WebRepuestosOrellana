@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - Proyecto</title>
     @Scripts.Render("~/bundles/jquery")
     <script type="text/javascript" src="~/scripts/mi.js"></script>
     @Styles.Render("~/Content/css")
@@ -23,12 +23,19 @@
                 @Html.ActionLink("WebRepuestosOrellana", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+                <Ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Venta", "index", "Ventas")</li>
+                    <li>@Html.ActionLink("Tipo de Familia", "index", "TipoProductos")</li>
+                    <li>@Html.ActionLink("Producto", "index", "Productos")</li>
+                    <li>@Html.ActionLink("Cliente", "index", "Clientes")</li>
+                    <li>@Html.ActionLink("Empleados", "index", "Empleados")</li>
+                    <li>@Html.ActionLink("Proveedores", "index", "Proveedores")</li>
+                    <li>@Html.ActionLink("Bodegas", "index", "Bodegas")</li>
+                    @Html.Partial("_LoginPartial")
+
+                </Ul>
+             
+
             </div>
         </div>
     </div>
