@@ -59,20 +59,6 @@ namespace WebRepuestosOrellana.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "ID,FechaCreacion,ClienteID,EmpleadoID, Lineas")] Venta venta)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Ventas.Add(venta);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.ClienteID = new SelectList(db.Clientes, "ID", "Nombre", venta.ClienteID);
-        //    ViewBag.EmpleadoID = new SelectList(db.Empleados, "ID", "Usuario", venta.EmpleadoID);
-        //    return View(venta);
-        //}
         public ActionResult Create(VentaViewModel model)
         {
             try
@@ -107,7 +93,6 @@ namespace WebRepuestosOrellana.Controllers
         }
 
         // GET: Ventas/Edit/5
-
         public ActionResult Edit(int? id)
         {
             if (id == null)

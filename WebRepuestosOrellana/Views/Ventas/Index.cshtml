@@ -22,7 +22,7 @@
             Usuario
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaCreacion)
+            Creación
         </th>
         <th></th>
     </tr>
@@ -39,7 +39,6 @@
             @Html.DisplayFor(modelItem => item.FechaCreacion)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id = item.ID }, new { @class = "btn btn-warning" }) |
             @Html.ActionLink("Detalles", "Details", new { id = item.ID }, new { @class = "btn btn-success" }) |
             @Html.ActionLink("Eliminar", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
         </td>
