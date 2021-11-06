@@ -7,7 +7,11 @@
 <h2>Bodega</h2>
 
 <p>
-    @Html.ActionLink("Crear Bodega", "Create")
+    <a href="@Url.Action("Create")" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Crear Bodega
+
+    </a>
 </p>
 <table class="table">
     <tr>
@@ -18,16 +22,18 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descripcion)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.ID }, new { @class = "btn btn-warning" }) |
+        @Html.ActionLink("Detalles", "Details", new { id = item.ID }, new { @class = "btn btn-success" }) |
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+    </td>
+    
+
+</tr>
 }
 
 </table>

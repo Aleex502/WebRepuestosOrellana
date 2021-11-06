@@ -78,14 +78,20 @@
     <div class="form-group">
         <div id="data"></div>
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Crear" class="btn btn-success" />
+            <button type="submit" value="Crear" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                    Crear
+                </button>
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Volver", "Index")
+   <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        Volver
+    </a>
 </div>
 
 @section Scripts {
