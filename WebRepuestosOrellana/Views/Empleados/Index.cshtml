@@ -7,7 +7,12 @@
 <h2>Empleado</h2>
 
 <p>
-    @Html.ActionLink("Crear Nuevo Usuario", "Create")
+
+    <a href="@Url.Action("Create")" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Crear Nuevo Empleado
+
+    </a>
 </p>
 <table class="table">
     <tr>
@@ -29,9 +34,9 @@
             @Html.DisplayFor(modelItem => item.Apellidos)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID })
+            @Html.ActionLink("Editar", "Edit", new { id = item.ID }, new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.ID }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
