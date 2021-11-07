@@ -65,6 +65,7 @@ namespace WebRepuestosOrellana.Controllers
                 string strReportPath = System.Web.HttpContext.Current.Server.MapPath("~/Reportes/StockActual.rpt");
                 reporte.Load(strReportPath);
                 reporte.SetDatabaseLogon("sa", "Aleex502");
+                reporte.Refresh();
                 Tables tables = reporte.Database.Tables;
                 Stream stream = null;
                 if (id == 1)
@@ -101,6 +102,7 @@ namespace WebRepuestosOrellana.Controllers
                 reporte.Load(strReportPath);
                 reporte.SetDatabaseLogon("sa", "Aleex502");
                 Tables tables = reporte.Database.Tables;
+                reporte.Refresh();
                 Stream stream = null;
                 if (id == 1)
                 {
