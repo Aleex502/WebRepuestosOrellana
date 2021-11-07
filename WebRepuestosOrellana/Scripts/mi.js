@@ -18,7 +18,7 @@
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 let precio = data.split("/")[0];
-                let stock = data.split("/")[1];
+                let stock = parseInt(data.split("/")[1]);
                 $("#PrecioUnitarioVenta").val(precio);
                 $("#TotalVenta").val(precio * cantidad);
                 if (stock <= 0) {

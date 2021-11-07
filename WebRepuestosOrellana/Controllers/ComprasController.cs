@@ -12,6 +12,7 @@ using WebRepuestosOrellana.Models.ViewModels;
 
 namespace WebRepuestosOrellana.Controllers
 {
+    [Authorize]
     public class ComprasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

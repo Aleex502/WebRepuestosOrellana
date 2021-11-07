@@ -10,6 +10,7 @@ using WebRepuestosOrellana.Models;
 
 namespace WebRepuestosOrellana.Controllers
 {
+    [Authorize]
     public class TipoProductosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
