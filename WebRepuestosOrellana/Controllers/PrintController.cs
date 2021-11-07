@@ -57,7 +57,7 @@ namespace WebRepuestosOrellana.Controllers
             }
 
         }
-        public ActionResult StockActual()
+        public ActionResult StockActual(int tipo)
         {
             try
             {
@@ -66,7 +66,16 @@ namespace WebRepuestosOrellana.Controllers
                 reporte.Load(strReportPath);
                 reporte.SetDatabaseLogon("sa", "Aleex502");
                 Tables tables = reporte.Database.Tables;
-                Stream stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                Stream stream = null;
+                if (tipo == 1)
+                {
+                    stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                }
+                else
+                {
+                    stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
+                }
+                 
                 stream.Flush();
                 reporte.Close();
                 reporte.Dispose();
@@ -78,6 +87,38 @@ namespace WebRepuestosOrellana.Controllers
             }
 
         }
+
+        public ActionResult Transacciones(int tipo)
+        {
+            try
+            {
+                ReportDocument reporte = new ReportDocument();
+                string strReportPath = System.Web.HttpContext.Current.Server.MapPath("~/Reportes/Transacciones.rpt");
+                reporte.Load(strReportPath);
+                reporte.SetDatabaseLogon("sa", "Aleex502");
+                Tables tables = reporte.Database.Tables;
+                Stream stream = null;
+                if (tipo == 1)
+                {
+                    stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                }
+                else
+                {
+                    stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
+                }
+
+                stream.Flush();
+                reporte.Close();
+                reporte.Dispose();
+                return File(stream, MediaTypeNames.Application.Pdf);
+            }
+            catch (Exception e)
+            {
+                return Content($"<h1>{e.Message}</h1>");
+            }
+
+        }
+
 
     }
 }
