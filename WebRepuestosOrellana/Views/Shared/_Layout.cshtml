@@ -24,16 +24,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <Ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Venta", "index", "Ventas")</li>
-                    <li>@Html.ActionLink("Tipo de Familia", "index", "TipoProductos")</li>
-                    <li>@Html.ActionLink("Producto", "index", "Productos")</li>
-                    <li>@Html.ActionLink("Cliente", "index", "Clientes")</li>
-                    <li>@Html.ActionLink("Compras", "index", "Compras")</li>
-                    <li>@Html.ActionLink("Proveedores", "index", "Proveedores")</li>
-                    
-                    @Html.Partial("_LoginPartial")
+                    @using Microsoft.AspNet.Identity
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Venta", "index", "Ventas")</li>
+                        <li>@Html.ActionLink("Tipo de Familia", "index", "TipoProductos")</li>
+                        <li>@Html.ActionLink("Producto", "index", "Productos")</li>
+                        <li>@Html.ActionLink("Cliente", "index", "Clientes")</li>
+                        <li>@Html.ActionLink("Compras", "index", "Compras")</li>
+                        <li>@Html.ActionLink("Proveedores", "index", "Proveedores")</li>
+                    }
+                        @Html.Partial("_LoginPartial")
 
-                </Ul>
+                    </Ul>
              
 
             </div>
