@@ -4,26 +4,26 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>Compra</h4>
+    <h4>Venta</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Empleado.Usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Empleado.Usuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Proveedor.Nombre)
+            Cliente
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Proveedor.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.UserName)
         </dd>
 
         <dt>
@@ -33,7 +33,6 @@
         <dd>
             @Html.DisplayFor(model => model.FechaCreacion)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.FechaFactura)
         </dt>
@@ -41,18 +40,38 @@
         <dd>
             @Html.DisplayFor(model => model.FechaFactura)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SerieFactura)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SerieFactura)
-        </dd>
-
     </dl>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var linea in Model.CompraLineas)
+                {
+                    <tr>
+                        <td>@linea.Producto</td>
+                        <td>@linea.Cantidad</td>
+                        <td>@linea.Precio</td>
+                        <td>@(linea.Precio * linea.Cantidad)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        Volver
+    </a>
+    <a href="@Url.Action($"Venta/{Model.ID}", "Print")" target="_blank" class="btn btn-success">
+        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+        Imprimir
+    </a>
 </p>

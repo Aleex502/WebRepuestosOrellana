@@ -13,7 +13,7 @@
     
 <div class="form-horizontal">
     <h4>Venta</h4>
-    <hr  />
+    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @*<div class="form-group">
             @Html.LabelFor(model => model.FechaCreacion, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -30,6 +30,7 @@
             @Html.ValidationMessageFor(model => model.ClienteID, "", new { @class = "text-danger" })
         </div>
     </div>
+    FechaFactura
 
     @*<div class="form-group">
             @Html.LabelFor(model => model.EmpleadoID, "EmpleadoID", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -71,7 +72,6 @@
                 </tr>
             </thead>
             <tbody id="ventasBody">
-                
             </tbody>
         </table>
     </div>
@@ -79,9 +79,9 @@
         <div id="data"></div>
         <div class="col-md-offset-2 col-md-10">
             <button type="submit" value="Crear" class="btn btn-success">
-                    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-                    Crear
-                </button>
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                Crear
+            </button>
         </div>
     </div>
 </div>

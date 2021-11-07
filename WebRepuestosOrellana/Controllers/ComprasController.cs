@@ -30,7 +30,12 @@ namespace WebRepuestosOrellana.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Compra compra = db.Compras.Find(id);
+            Compra compra = db.Compras
+                .Include(v => v.Usuario)
+                .Include(v => v.Proveedor)
+                .Include(v => v.CompraLineas)
+                .FirstOrDefault(x => x.ID == id);
+
             if (compra == null)
             {
                 return HttpNotFound();
@@ -59,11 +64,13 @@ namespace WebRepuestosOrellana.Controllers
             try
             {
                 var idUsuario = User.Identity.GetUserId();
-                Compra Compra = new Compra();
-                Compra.UsuarioID = idUsuario;
-                Compra.FechaCreacion = DateTime.Now;
-                Compra.ProveedorID = model.ProveedorID;
-                db.Compras.Add(Compra);
+                Compra compra = new Compra();
+                compra.UsuarioID = idUsuario;
+                compra.FechaCreacion = DateTime.Now;
+                compra.FechaFactura = model.FechaFactura;
+                compra.SerieFactura = model.SerieFactura;
+                compra.ProveedorID = model.ProveedorID;
+                db.Compras.Add(compra);
                 db.SaveChanges();
 
                 foreach (var linea in model.lineasCompra)
@@ -73,7 +80,7 @@ namespace WebRepuestosOrellana.Controllers
                     lineaCompra.Precio = linea.Precio;
                     lineaCompra.ProductoID = linea.ProductoID;
                     lineaCompra.Cantidad = linea.Cantidad;
-                    lineaCompra.CompraID = Compra.ID;
+                    lineaCompra.CompraID = compra.ID;
                     db.CompraLineas.Add(lineaCompra);
                 }
 
