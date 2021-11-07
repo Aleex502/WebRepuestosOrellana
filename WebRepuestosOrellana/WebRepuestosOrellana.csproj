@@ -242,6 +242,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Reportes\Venta.rpt" />
     <Content Include="Reportes\Compra.rpt" />
+    <Content Include="Reportes\StockActual.rpt" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
