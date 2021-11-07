@@ -12,7 +12,24 @@
         Crear Nuevos Productos
 
     </a>
-   
+    <a href="@Url.Action("StockActual/1", "Print")" class="btn btn-danger">
+        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+        Stock Actual PDF
+    </a>
+    <a href="@Url.Action("StockActual/2", "Print")" class="btn btn-success">
+        <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+        Stock Actual Excel
+    </a>
+
+    <a href="@Url.Action("Transacciones/1", "Print")" class="btn btn-danger">
+        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+        Transacciones PDF
+    </a>
+    <a href="@Url.Action("Transacciones/2", "Print")" class="btn btn-success">
+        <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+        Transacciones Excel
+    </a>
+
 </p>
 <table class="table">
     <tr>
