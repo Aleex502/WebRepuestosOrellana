@@ -57,7 +57,7 @@ namespace WebRepuestosOrellana.Controllers
             }
 
         }
-        public ActionResult StockActual(int tipo)
+        public ActionResult StockActual(int id)
         {
             try
             {
@@ -67,19 +67,23 @@ namespace WebRepuestosOrellana.Controllers
                 reporte.SetDatabaseLogon("sa", "Aleex502");
                 Tables tables = reporte.Database.Tables;
                 Stream stream = null;
-                if (tipo == 1)
+                if (id == 1)
                 {
                     stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Flush();
+                    reporte.Close();
+                    reporte.Dispose();
+                    return File(stream, MediaTypeNames.Application.Pdf);
                 }
                 else
                 {
                     stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
+                    stream.Flush();
+                    reporte.Close();
+                    reporte.Dispose();
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, "application/vnd.ms-excel", "StockActual.xls");
                 }
-                 
-                stream.Flush();
-                reporte.Close();
-                reporte.Dispose();
-                return File(stream, MediaTypeNames.Application.Pdf);
             }
             catch (Exception e)
             {
@@ -88,7 +92,7 @@ namespace WebRepuestosOrellana.Controllers
 
         }
 
-        public ActionResult Transacciones(int tipo)
+        public ActionResult Transacciones(int id)
         {
             try
             {
@@ -98,19 +102,24 @@ namespace WebRepuestosOrellana.Controllers
                 reporte.SetDatabaseLogon("sa", "Aleex502");
                 Tables tables = reporte.Database.Tables;
                 Stream stream = null;
-                if (tipo == 1)
+                if (id == 1)
                 {
                     stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Flush();
+                    reporte.Close();
+                    reporte.Dispose();
+                    return File(stream, MediaTypeNames.Application.Pdf);
                 }
                 else
                 {
                     stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
+                    stream.Flush();
+                    reporte.Close();
+                    reporte.Dispose();
+                    return File(stream, MediaTypeNames.Application.Octet);
                 }
 
-                stream.Flush();
-                reporte.Close();
-                reporte.Dispose();
-                return File(stream, MediaTypeNames.Application.Pdf);
+                
             }
             catch (Exception e)
             {
