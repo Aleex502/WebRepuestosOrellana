@@ -57,5 +57,27 @@ namespace WebRepuestosOrellana.Controllers
             }
 
         }
+        public ActionResult StockActual()
+        {
+            try
+            {
+                ReportDocument reporte = new ReportDocument();
+                string strReportPath = System.Web.HttpContext.Current.Server.MapPath("~/Reportes/StockActual.rpt");
+                reporte.Load(strReportPath);
+                reporte.SetDatabaseLogon("sa", "Aleex502");
+                Tables tables = reporte.Database.Tables;
+                Stream stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                stream.Flush();
+                reporte.Close();
+                reporte.Dispose();
+                return File(stream, MediaTypeNames.Application.Pdf);
+            }
+            catch (Exception e)
+            {
+                return Content($"<h1>{e.Message}</h1>");
+            }
+
+        }
+
     }
 }
