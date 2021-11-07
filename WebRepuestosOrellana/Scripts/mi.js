@@ -11,13 +11,20 @@
     $("#VentaProductoID").change(function () {
         let productoID = $("#VentaProductoID").val();
         let cantidad = $("#CantidadVentaProducto").val();
+        $("#addLineaVenta").prop("disabled", false);
         $.ajax({
             type: "GET",
             url: `/productos/GetProduct/${productoID}`,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                $("#PrecioUnitarioVenta").val(data);
-                $("#TotalVenta").val(data * cantidad);
+                let precio = data.split("/")[0];
+                let stock = data.split("/")[1];
+                $("#PrecioUnitarioVenta").val(precio);
+                $("#TotalVenta").val(precio * cantidad);
+                if (stock <= 0) {
+                    $("#addLineaVenta").prop("disabled", true);
+                    alert("El articulo no cuenta con stock para utilizarse en una venta");
+                }
             }
         })
     })

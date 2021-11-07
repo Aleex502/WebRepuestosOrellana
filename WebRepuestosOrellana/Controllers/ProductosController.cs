@@ -125,7 +125,9 @@ namespace WebRepuestosOrellana.Controllers
         public ActionResult GetProduct(int id)
         {
            Producto producto = db.Productos.Find(id);
-            return Content(producto.Precio.ToString());
+            var stock = db.Database.SqlQuery<int>("SELECT	(ISNULL(COMPRAS.SUMA,0) - ISNULL(VENTAS.SUMA,0)) AS STOCK	FROM 	Productoes A	INNER JOIN TipoProductoes D ON A.TipoProductoID = D.ID	LEFT JOIN(		SELECT ProductoID, SUM(cantidad) AS SUMA from VentaLineas GROUP BY ProductoID	) AS VENTAS ON A.ID = VENTAS.ProductoID	LEFT JOIN(		SELECT ProductoID, SUM(cantidad) AS SUMA from CompraLineas GROUP BY ProductoID	) AS COMPRAS ON A.ID = COMPRAS.ProductoID	where a.id = 1")
+                .FirstOrDefault();
+            return Content(producto.Precio.ToString() + "/" + stock.ToString());
         }
         protected override void Dispose(bool disposing)
         {

@@ -118,7 +118,8 @@ namespace WebRepuestosOrellana.Controllers
                     stream.Flush();
                     reporte.Close();
                     reporte.Dispose();
-                    return File(stream, MediaTypeNames.Application.Octet);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, "application/vnd.ms-excel", "Transacciones.xls");
                 }
 
                 
