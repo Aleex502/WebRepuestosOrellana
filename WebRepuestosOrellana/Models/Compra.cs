@@ -12,9 +12,9 @@ namespace WebRepuestosOrellana.Models
         public DateTime FechaFactura { get; set; }
         public string SerieFactura { get; set; }
         public int ProveedorID { get; set; }
-        public int EmpleadoID { get; set; }
+        public string UsuarioID { get; set; }
+        public ApplicationUser Usuario { get; set; }
         public Proveedor Proveedor { get; set; }
-        public Empleado Empleado { get; set; }
         public ICollection<CompraLinea> CompraLineas { get; set; }
     }
 }
